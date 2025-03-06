@@ -3,10 +3,10 @@ package hillel.hw;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Basket {
+public class Cart {
     private List<Product> items;
 
-    public Basket() {
+    public Cart() {
         this.items = new ArrayList<>();
     }
 
@@ -35,7 +35,7 @@ public class Basket {
     @Override
     public String toString() {
         int id = 0;
-        String basket = "Basket:\n";
+        String basket = "Cart:\n";
         for(Product product: this.items){
             id++;
             basket += id + ". " + product.toString() + "\n";

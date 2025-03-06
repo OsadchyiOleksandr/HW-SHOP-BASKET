@@ -9,7 +9,7 @@ public class ShoppingBasket {
         ProductDataProvider productsDP = new ProductDataProvider();
         List<Product> products = productsDP.getProducts();
         ProductRepository productRepo = new ProductRepository(products);
-        Basket cart = new Basket();
+        Cart cart = new Cart();
         Scanner scanner = new Scanner(System.in);
 
         while (true) {

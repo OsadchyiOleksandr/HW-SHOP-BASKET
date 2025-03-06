@@ -21,5 +21,31 @@ public class ProductRepository {
         }
         return null;
     }
+
+    public void addProduct(Product product) {
+        if (getById(product.getId()) == null) {
+            products.add(product);
+        }
+    }
+
+    public Product updateProduct(int productId, String name, double price) {
+        Product product = getById(productId);
+        if (product != null) {
+            if (name != null) {
+                product = new Product(productId, name, price);
+            }
+            return product;
+        }
+        return null;
+    }
+
+    public Product deleteProduct(int productId) {
+        Product product = getById(productId);
+        if (product != null) {
+            products.remove(product);
+            return product;
+        }
+        return null;
+    }
 }
 
