@@ -1,4 +1,6 @@
-package hillel.hw;
+package hillel.hw.dataprovider;
+
+import hillel.hw.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
