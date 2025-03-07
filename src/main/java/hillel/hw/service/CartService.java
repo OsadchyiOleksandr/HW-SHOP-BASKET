@@ -1,13 +1,16 @@
 package hillel.hw.service;
 
 import hillel.hw.model.Cart;
-import hillel.hw.model.Product;
 import hillel.hw.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CartService {
-    private ProductRepository productRepository;
-    private Cart cart;
+    private final ProductRepository productRepository;
+    private final Cart cart;
 
+    @Autowired
     public CartService(ProductRepository productRepository, Cart cart) {
         this.productRepository = productRepository;
         this.cart = cart;
@@ -23,5 +26,9 @@ public class CartService {
 
     public Cart getCart() {
         return cart;
+    }
+
+    public ProductRepository getProductRepository() {
+        return productRepository;
     }
 }

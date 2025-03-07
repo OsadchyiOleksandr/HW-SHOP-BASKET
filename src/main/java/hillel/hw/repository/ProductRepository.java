@@ -1,17 +1,19 @@
 package hillel.hw.repository;
 
 import hillel.hw.model.Product;
-import hillel.hw.dataprovider.ProductDataProvider;
+import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class ProductRepository {
-    private List<Product> products;
-
-    public ProductRepository(ProductDataProvider dataProvider) {
-        this.products = dataProvider.getProducts();
-    }
+    private final List<Product> products = new ArrayList<>() {{
+        add(new Product(1, "Product A", 100));
+        add(new Product(2, "Product B", 200));
+        add(new Product(3, "Product C", 300));
+    }};
 
     public List<Product> getAllProducts() {
         return products;
@@ -29,3 +31,4 @@ public class ProductRepository {
         products.removeIf(product -> product.getId() == id);
     }
 }
+

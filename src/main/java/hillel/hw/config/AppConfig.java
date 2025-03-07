@@ -1,6 +1,5 @@
 package hillel.hw.config;
 
-import hillel.hw.dataprovider.ProductDataProvider;
 import hillel.hw.controller.CartController;
 import hillel.hw.repository.ProductRepository;
 import hillel.hw.model.Cart;
@@ -12,13 +11,8 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
     @Bean
-    public ProductDataProvider dataProvider() {
-        return new ProductDataProvider();
-    }
-
-    @Bean
-    public ProductRepository productRepository(ProductDataProvider dataProvider) {
-        return new ProductRepository(dataProvider);
+    public ProductRepository productRepository() {
+        return new ProductRepository();
     }
 
     @Bean

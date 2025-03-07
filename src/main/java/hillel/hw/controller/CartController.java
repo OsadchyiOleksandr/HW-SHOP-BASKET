@@ -1,61 +1,62 @@
 package hillel.hw.controller;
 
-import hillel.hw.dataprovider.ProductDataProvider;
 import hillel.hw.service.CartService;
-import hillel.hw.repository.ProductRepository;
+import hillel.hw.view.ConsoleView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;
 
+@Controller
 public class CartController {
-    private CartService cartService;
-    private ProductRepository productRepository;
-    private Scanner scanner;
+    ConsoleView view = new ConsoleView();
+    private final CartService cartService;
+    private final Scanner scanner;
 
+    @Autowired
     public CartController(CartService cartService) {
         this.cartService = cartService;
-        this.productRepository = new ProductRepository(new ProductDataProvider());
         this.scanner = new Scanner(System.in);
     }
 
     public void showMenu() {
         while (true) {
-            System.out.println("\nМеню:");
-            System.out.println("1. Показати всі товари");
-            System.out.println("2. Додати товар до кошика");
-            System.out.println("3. Видалити товар з кошика");
-            System.out.println("4. Показати кошик");
-            System.out.println("5. Вийти");
-
+            view.printMessage("\nМеню:" +
+                    "\n1. Показати всі товари" +
+                    "\n2. Додати товар до кошика" +
+                    "\n3. Видалити товар з кошика" +
+                    "\n4. Показати кошик" +
+                    "\n5. Вийти");
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1: {
-                    System.out.println("Список всіх товарів:");
-                    productRepository.getAllProducts().forEach(System.out::println);
+                    view.printMessage("Список всіх товарів:");
+                    cartService.getProductRepository().getAllProducts().forEach(System.out::println);
                     break;
                 }
                 case 2: {
-                    System.out.println("Введіть ID товару для додавання до кошика:");
+                    view.printMessage("Введіть ID товару для додавання до кошика:");
                     int id = scanner.nextInt();
                     cartService.addProductToCart(id);
                     break;
                 }
                 case 3: {
-                    System.out.println("Введіть ID товару для видалення з кошика:");
+                    view.printMessage("Введіть ID товару для видалення з кошика:");
                     int id = scanner.nextInt();
                     cartService.removeProductFromCart(id);
                     break;
                 }
                 case 4: {
-                    System.out.println("Вміст кошика:");
+                    view.printMessage("Вміст кошика:");
                     cartService.getCart().getItems().forEach(System.out::println);
                     break;
                 }
                 case 5: {
-                    System.out.println("Вихід...");
+                    view.printMessage("Вихід...");
                     return;
                 }
                 default:
-                    System.out.println("Невірний вибір.");
+                    view.printMessage("Невірний вибір.");
             }
         }
     }
